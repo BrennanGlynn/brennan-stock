@@ -9,9 +9,10 @@ app.get("/api/hello", (req, res) => {
 });
 
 // Serve static assets
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname+'/client/build/index.html'));
+// });
 
+app.use('/static', express.static(path.join(__dirname, 'client/build')));
 
 app.listen(port, () => console.log(`Listening on ${port}`));
