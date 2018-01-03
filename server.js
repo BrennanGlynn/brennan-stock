@@ -4,15 +4,16 @@ const path = require("path");
 const app = express();
 const port = process.env.PORT || 8080;
 
+// Serve stic files from React app
+app.use(express.static(path.join(__dirname, "client/build")));
+
 app.get("/api/hello", (req, res) => {
-    res.send({ express: "Hello from express"});
+    res.json({express: "hello from express"});
 });
 
-app.use("/static", express.static(path.join(__dirname, "client/build")));
-
-// Serve static assets
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
-app.listen(port, () => console.log(`Listening on ${port}`));
+app.listen(port);
+console.log(`Server listening on port ${port}.`);
