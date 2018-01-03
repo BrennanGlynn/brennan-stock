@@ -8,10 +8,12 @@ app.get("/api/hello", (req, res) => {
     res.send({ express: "Hello from express"});
 });
 
-// Serve react app
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
+
+// Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
-    // res.sendFile(path.join(__dirname+"/client/build/index.html"));
-    res.send({fuck: "this"})
+    res.sendFile(path.resolve(__dirname, '..', 'build', 'index.html'));
 });
 
 app.listen(port, () => console.log(`Listening on ${port}`));
